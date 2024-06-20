@@ -54,7 +54,17 @@ class DefaultController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('auth/index');
+
+        return $this->render('index');
+    }
+
+    public function actionLogout()
+    {
+        // Set to default url
+        Yii::$app->session->setFlash('logout', "Logout in Successfully");
+        Yii::$app->setHomeUrl(Yii::getAlias("@web/admin/auth/login"));
+        Yii::$app->user->logout();
+        return $this->goHome();
     }
 
     public function actionDependent()
